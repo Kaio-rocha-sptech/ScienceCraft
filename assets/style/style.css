@@ -270,3 +270,58 @@
 }
 
 
+/* ======================== Pagina Login =========================== */
+
+.container{
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 20%;
+  display: flex;
+  border: 2px solid;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  height: 600px;
+  text-align: left;
+  background-color: #031928;
+  border-radius: 28px;
+  box-shadow: 1px 1px 32px #00e6ff;
+  transition: 1s ease;
+}
+
+.container:hover{
+  transform: scale(110%);
+}
+
+.div_form {
+  width: 80%;
+  height: 60%;
+  display: grid;
+  align-items: center;
+}
+
+.div_form label{
+  color: #dceeff;
+  font-family: "Manrope";
+  font-size: 24px;
+  margin-left: 10%;
+}
+
+  .ipt_login {
+    width: 1005;
+    margin-top: 50px;
+  }
+
+  .div_form input{
+    width: 75%;
+    background-color: #ffffff1e;
+    height: 55px;
+    margin-top: 10px;
+    margin-inline: 10%;
+    border: none;
+    border-bottom: 2px solid aqua;
+    border-radius: 12px;
+    color: #dceeff;
+    font-size: 18px;
+  }
+
