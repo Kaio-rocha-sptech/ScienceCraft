@@ -5,7 +5,7 @@ https://via.placeholder.com/1200x300?text=scienceCraft+Logo
 
 # 🌌 scienceCraft
 
-![Banner](https://via.placeholder.com/1200x300?text=scienceCraft+Logo)  
+![Banner](public/assets/imgs/background-image.png)  
 *Bem-vindo ao scienceCraft, o universo onde ciência e Minecraft se encontram!*
 
 ---
@@ -37,7 +37,7 @@ https://via.placeholder.com/1200x300?text=scienceCraft+Logo
 
 
 
-
+## Informações Uteis
 cores;
 https://coolors.co/00a6fb-0582ca-006494-003554-03273c-051923
 TOKEN: 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
