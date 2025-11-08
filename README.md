@@ -2,21 +2,13 @@
 # 🌌 scienceCraft
 
 ![Banner](public/assets/imgs/background-image.png)  
-*Bem-vindo ao scienceCraft, o universo onde ciência e Minecraft se encontram!*
+*Bem-vindo ao scienceCraft*
 
 ---
 
 ## 🔹 Sobre o Projeto
 
-**scienceCraft** é um site interativo inspirado no Minecraft, desenvolvido para mostrar **modpacks, tutoriais e recursos personalizados** com uma estética neon futurista. O projeto combina design moderno, usabilidade e conteúdo relevante para fãs de Minecraft e curiosos por tecnologia.  
-
-### Principais Características
-
-- 🎨 Estilo neon azul, moderno e atrativo  
-- 🧩 Seções de modpacks com descrições resumidas  
-- 🚀 Interface responsiva e amigável  
-- ⚡ Logo e elementos gráficos inspirados no universo Minecraft  
-- 🖥️ Tecnologia web com HTML, CSS e JavaScript  
+**scienceCraft** é um modpack de minecraft, este site interativo inspirado em diversos outros sites ja existentes com o mesmo teor, tais como: BetterMC, ATM10, dentre outros. Criado por **Kaio Rodrigues**, baseando-se em seus interesses e totalmente voltado a exploração do limite do **MINECRAFT**  
 
 ---
 
@@ -25,13 +17,9 @@
 - **HTML5** – Estrutura semântica das páginas  
 - **CSS3** – Estilização e animações modernas  
 - **JavaScript** – Interatividade e dinamismo  
-- (Opcional) **Frameworks**: TailwindCSS, Framer Motion, shadcn/ui  
+- **Node.js**: - web-data-vis  
 
 ---
-
-## 📂 Estrutura do Projeto
-
-
 
 ## Informações Uteis
 cores;
