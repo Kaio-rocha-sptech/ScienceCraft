@@ -1,8 +1,4 @@
 # projeto-individual
-
-https://via.placeholder.com/1200x300?text=scienceCraft+Logo
-
-
 # 🌌 scienceCraft
 
 ![Banner](public/assets/imgs/background-image.png)  
