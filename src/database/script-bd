@@ -1,0 +1,20 @@
+CREATE DATABASE sciencecraft;
+USE sciencecraft;
+
+CREATE TABLE usuario(
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+email VARCHAR(120) NOT NULL,
+emailRec VARCHAR(120),
+senha VARCHAR(45) NOT NULL,
+dtNasc DATE,
+fkConvite INT,
+	FOREIGN KEY (fkConvite) REFERENCES usuario(idUsuario) 
+)AUTO_INCREMENT = 10;
+
+CREATE TABLE pessoaADD(
+fkUsuario INT PRIMARY KEY AUTO_INCREMENT,
+apelido VARCHAR(45),
+tipoRelacao VARCHAR(45),
+dtAdicao DATETIME
+);
