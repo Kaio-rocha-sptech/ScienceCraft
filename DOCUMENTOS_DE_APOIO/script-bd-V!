@@ -1,0 +1,52 @@
+CREATE DATABASE sciencecraft;
+USE sciencecraft;
+
+CREATE TABLE usuario(
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+email VARCHAR(120) NOT NULL,
+emailRec VARCHAR(120),
+senha VARCHAR(45) NOT NULL,
+dtNasc DATE,
+fkConvite INT,
+	FOREIGN KEY (fkConvite) REFERENCES usuario(idUsuario) 
+)AUTO_INCREMENT = 10;
+
+CREATE TABLE pessoaADD(
+fkUsuario INT PRIMARY KEY AUTO_INCREMENT,
+apelido VARCHAR(45),
+tipoRelacao VARCHAR(45),
+dtAdicao DATETIME
+);
+
+CREATE TABLE relacao(
+idRelacao INT PRIMARY KEY AUTO_INCREMENT,
+dthrMensagem DATETIME,
+conteudo VARCHAR(250),
+tipoMensagem VARCHAR(45),
+fkPessoaADD INT,
+fkUsuario INT,
+	FOREIGN KEY (fkPessoaADD) REFERENCES pessoaADD(fkUsuario)
+);
+
+CREATE TABLE publicacao (
+idPublicacao INT PRIMARY KEY AUTO_INCREMENT,
+titulo VARCHAR(120),
+descrcao VARCHAR(45),
+conteudo VARCHAR(45),
+dtPostagem DATETIME,
+qtdCurtidas INT,
+qtdComentarios INT,
+fkUsuario INT,
+	FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
+);
+
+CREATE TABLE interacao(
+idInteracao INT PRIMARY KEY AUTO_INCREMENT,
+tipoInteracao VARCHAR(45),
+conteudoInteracao VARCHAR(250),
+fkPublicacao INT,
+fkUsuario INT,
+	FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+FOREIGN KEY (fkPublicacao) REFERENCES publicacao(idPublicacao)
+);
