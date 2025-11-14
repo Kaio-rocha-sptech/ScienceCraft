@@ -12,6 +12,9 @@ fkConvite INT,
 	FOREIGN KEY (fkConvite) REFERENCES usuario(idUsuario) 
 )AUTO_INCREMENT = 10;
 
+INSERT INTO usuario VALUES
+(DEFAULT, 'kaio','kaio.rocha@sptech.school','kaio.rodrigues@sptech.school','senha123','2006-05-14', NULL);
+
 CREATE TABLE pessoaADD(
 fkUsuario INT PRIMARY KEY AUTO_INCREMENT,
 apelido VARCHAR(45),
@@ -48,5 +51,5 @@ conteudoInteracao VARCHAR(250),
 fkPublicacao INT,
 fkUsuario INT,
 	FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
-FOREIGN KEY (fkPublicacao) REFERENCES publicacao(idPublicacao)
+	FOREIGN KEY (fkPublicacao) REFERENCES publicacao(idPublicacao)
 );
