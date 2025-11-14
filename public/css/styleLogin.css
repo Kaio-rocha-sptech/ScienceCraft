@@ -1,0 +1,83 @@
+body {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #02121a;
+}
+.container { 
+    margin: auto;
+    margin-left: 31%; 
+    margin-top: 5%; 
+    margin-bottom: 20%; 
+    display: flex; 
+    border: 1px #02121a;
+    align-items: center; 
+    justify-content: center; 
+    width: 40%; 
+    height: 60%; 
+    text-align: left; 
+    border-radius: 28px; 
+    box-shadow: 1px 1px 32px #00e6ff; 
+    transition: 1s ease; 
+    position: absolute; 
+    background-image: linear-gradient(to top, #236c9a00, #0e5788); 
+} 
+    
+.container:hover { 
+    transform: scale(105%); 
+}
+
+
+.div_form{
+  color: #dceeff;
+  font-family: "Manrope";
+  font-size: 20px;
+  display: grid;
+  text-align: left;
+  justify-content: center;
+  justify-items: center;
+}
+
+.ipt_login {
+  width: 1005;
+  margin-top: 50px;
+}
+
+.div_form input {
+  width: 130%;
+  background-color: #ffffff1e;
+  height: 30px;
+  padding-left: 20px;
+  margin-top: 8px;
+  margin-inline: 10%;
+  border: none;
+  border-bottom: 2px solid aqua;
+  border-radius: 12px;
+  color: #dceeff;
+  font-size: 18px;
+  transition: 2s ease;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 8px #00e6ff
+}
+
+.div_form button {
+  width: 50%;
+  padding: 10px 0;
+  background-color: #031928;
+  border: 1px solid #00e6ff;
+  color: #dceeff;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.4s ease;
+  margin-top: 25px;
+}
+
+.div_form button:hover {
+  box-shadow: 0 0 12px #00e6ff, 0 0 20px #00e6ff;
+  transform: scale(1.05);
+}
+

@@ -4,16 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/style/style.css">
-    <style>body{
-        height: 100%;
-        width: 100%;
-        box-sizing: border-box;
-        background-color: #02121a;
+    <link rel="stylesheet" href="css/styleLogin.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
 
-        }
-        </style>
-        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+    <script src="js/sessao.js"></script>
     <title>SCC | login</title>
 </head>
 
@@ -27,30 +22,111 @@
             <ul>
                 <li><a href="index.html">Início</a></li>
                 <li><a href="simulador.html">Simulador</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
                 <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="container">
+    <div class="login">
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+        </div>
+
+    <section class="container">
         <div id="div_for-login" class="div_form">
             <label for="ipt_1">Email:</label><br>
-            <input type="text" class="ipt_login" id="ipt_1">
+            <input type="text" class="ipt_login" id="ipt_email">
             <br><br>
             <label for="ipt_2">Senha:</label><br>
-            <input type="password" class="ipt_login" id="ipt_2">
+            <input type="password" class="ipt_login" id="ipt_senha">
+            <button onclick="entrar()">Login</button>
         </div>
-    </div>
+    </section>
 
-    <footer class="rodape">
+    <!-- <footer class="rodape">
         <p>2025 ScienceCraft — Criado por Kaio Rodrigues</p>
         <div class="links_rodape">
             <a href="#">GitHub</a>
             <a href="#">Discord</a>
             <a href="#">Contato</a>
         </div>
-    </footer>
+    </footer> -->
 </body>
 
 </html>
+
+<script>
+
+ function entrar() {
+        aguardar();
+
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>
