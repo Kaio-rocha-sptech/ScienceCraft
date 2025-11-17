@@ -26,29 +26,31 @@
     </nav>
 </header>
 
+  <div class="card_erro" id="cardErro">
+    <span id="mensagem_erro"></span>
+  </div>
+
 <section class="container">
   <div class="div_form">
         <label for="ipt_nome">Nome:</label>
-    <input type="text" id="ipt_nome">
+    <input type="text" id="ipt_nome" value="slaMan">
 
         <label for="ipt_email">Email:</label>
-    <input type="email" id="ipt_email">
+    <input type="email" id="ipt_email" value="sla.teste@sptech.school">
 
-        <label for="ipt_email">Email de recuperação:</label>
-    <input type="email" id="ipt_email"> 
 
-        <label for="ipt_email">Data de nascimento:</label>
-    <input type="date" id="ipt_email">
+        <label for="ipt_dtNasc">Data de nascimento:</label>
+    <input type="date" id="ipt_dtNasc" value="2005-02-02">
 
     
     <label for="ipt_senha">Senha:</label>
-    <input type="password" id="ipt_senha">
+    <input type="password" id="ipt_senha" value="senha321">
     
     <label for="ipt_senha2">Confirmar senha:</label>
-    <input type="password" id="ipt_senha2">
+    <input type="password" id="ipt_senha2" value="senha321">
     
-    <label for="ipt_email">Codigo de convite:</label>
- <input type="text" id="ipt_email">
+    <label for="ipt_codigo">Codigo de convite:</label>
+ <input type="text" id="ipt_codigo" value="10">
  
     <button onclick="cadastrar()">Cadastrar</button>
     <div class="message" id="msg"></div>
@@ -67,20 +69,21 @@
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var codigoVar = codigo_input.value;
-    var idEmpresaVincular
+    var nomeVar = ipt_nome.value;
+    var emailVar = ipt_email.value;
+    var dtNascVar = ipt_dtNasc.value
+    var senhaVar = ipt_senha.value;
+    var confirmacaoSenhaVar = ipt_senha2.value;
+    var conviteVar = ipt_codigo.value;
 
     // Verificando se há algum campo em branco
     if (
       nomeVar == "" ||
       emailVar == "" ||
+      dtNascVar == "" ||      
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
-      codigoVar == ""
+      conviteVar == ""
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -91,19 +94,6 @@
     } else {
       setInterval(sumirMensagem, 5000);
     }
-
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
-    //     console.log("Código de ativação válido.");
-    //     break;
-    //   } else {
-    //     cardErro.style.display = "block";
-    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-    //     finalizarAguardar();
-    //   }
-    // }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -117,7 +107,8 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular
+        dtNascServer: dtNascVar,
+        conviteServer: conviteVar
       }),
     })
       .then(function (resposta) {
@@ -148,24 +139,24 @@
   }
 
   // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresasCadastradas.push(empresa);
 
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
+  //           console.log("listaEmpresasCadastradas")
+  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
 
   function sumirMensagem() {
     cardErro.style.display = "none";
