@@ -10,13 +10,56 @@ body{
 
 
 .container-pub{
-
+    border: 2px solid;
+    height: 500px;
+    width: 55%;
+    display: grid;
+    justify-content: center;
+    margin-top: 40px;
+    margin-left: 5%;
+    border-radius: 8px;
 }
 
 .div_img{
-    
+    border: 1px solid;
+    height: 400px;
+    width: 400px;
+    margin-left: -4%;
+    /* margin-top: 15%; */
 }
 
-.container-p input{
+.infoUser{
+    width: 80%;
+    border: 2px solid;
+    height: 50px;
+    margin-top: 10%;
+    margin-bottom: 0px;
+    margin-left: -4%;
+    align-items: center;
+    display: flex;
+}
+
+#div_imgPerfil{
+    border: 2px solid;
+    height: 40px;
+    width: 40px;
+}
+
+#nomePerfil{
+    border: 2px solid;
+    height: 30px;
+    display: flex;
+    width: 35%;
+    margin-left: 10px;
+    align-items: end;
+    font-size: 12px;
+}
+
+.right-container{
+    border: 2px solid;
+    height: 80vh;
+    position: static;
+    
+    width: 50%;
 
 }
