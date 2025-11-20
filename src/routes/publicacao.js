@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var avisoController = require("../controllers/avisoController");
+var publicacaoController = require("../controllers/publicacaoController");
 
 router.get("/listar", function (req, res) {
     avisoController.listar(req, res);
@@ -19,11 +19,11 @@ router.post("/publicar/:idUsuario", function (req, res) {
     avisoController.publicar(req, res);
 });
 
-router.put("/editar/:idAviso", function (req, res) {
+router.put("/editar/:idPublicacao", function (req, res) {
     avisoController.editar(req, res);
 });
 
-router.delete("/deletar/:idAviso", function (req, res) {
+router.delete("/deletar/:idPublicacao", function (req, res) {
     avisoController.deletar(req, res);
 });
 

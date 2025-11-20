@@ -23,6 +23,7 @@ function autenticar(req, res) {
                         res.json({
                             nome: resultadoAutenticar[0].nome,
                             email: resultadoAutenticar[0].email,
+                            idUsuario: resultadoAutenticar[0].idUsuario,
                         });
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
