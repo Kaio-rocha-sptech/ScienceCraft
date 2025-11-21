@@ -97,3 +97,24 @@ body {
   font-weight: 500;
   font-size: 20px;
 }
+
+
+
+.card_erro {
+    display: none;
+    color: #dcfeff; 
+    background-color: #1a1b2b67;
+    border: 1px solid #4ddbff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 10px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card_erro.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+

@@ -35,7 +35,7 @@ fkUsuario INT,
 CREATE TABLE publicacao (
 idPublicacao INT PRIMARY KEY AUTO_INCREMENT,
 titulo VARCHAR(120),
-descrcao VARCHAR(45),
+descricao VARCHAR(45),
 conteudo VARCHAR(45),
 dtPostagem DATETIME,
 qtdCurtidas INT,

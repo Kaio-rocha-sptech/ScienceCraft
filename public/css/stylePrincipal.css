@@ -1,115 +1,64 @@
-body{
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #02121a;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-*{
-    box-sizing: 100%;
-    width: 100%;
+body {
+  height: 100%;
+  width: 100%;
+}
+.publicacao {
+  border: 2px solid #333;
+  padding: 15px;
+  margin: 15px 0;
+  width: 80%;
+  text-align: left;
+  background-color: #fff;
 }
 
-
-.divPublicacao{
-    border: 2px solid;
-    height: 500px;
-    width: 55%;
-    display: grid;
-    justify-content: center;
-    margin-top: 40px;
-    margin-left: 5%;
-    border-radius: 8px;
-    z-index: 1;
-    box-shadow:  0 0  12px rgb(0, 255, 255);
-    background-color: #021b27;
+.publicacao span:first-child {
+  display: block;
+  border: 1px dashed #999;
+  padding: 5px;
+  margin-bottom: 8px;
 }
 
-.div_img{
-    border: 1px solid;
-    height: 400px;
-    width: 400px;
-    margin-left: -4%;
-    /* margin-top: 15%; */
+.publicacao-nome {
+  display: block;
+  border: 1px dashed #00aaff;
+  padding: 5px;
+  margin-bottom: 8px;
 }
 
-#div_conteudo{
-    display: flex;
-    justify-content: space-between;
+.publicacao-titulo {
+  display: block;
+  border: 1px dashed #ffaa00;
+  padding: 5px;
+  margin-bottom: 8px;
 }
 
-.infoUser{
-    width: 80%;
-    border: 2px solid;
-    height: 50px;
-    margin-top: 10%;
-    margin-bottom: 0px;
-    margin-left: -4%;
-    align-items: center;
-    display: flex;
+.publicacao-descricao {
+  border: 1px dashed #ff5555;
+  padding: 8px;
+  margin-bottom: 12px;
 }
 
-#div_imgPerfil{
-    border: 2px solid;
-    height: 40px;
-    width: 40px;
+.div-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
 }
 
-#nomePerfil{
-    height: 30px;
-    display: flex;
-    width: 40%;
-    margin-left: 10px;
-    align-items: end;
-    font-size: 18px;
-    color: #dceeff;;
+.publicacao-btn-editar {
+  padding: 8px 15px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.right-container{
-    border: 2px solid;
-    height: 93.2vh;
-    right: 0;
-    width: 30%;
-    z-index: 3;
-    float: right;
-    display: grid;
-    justify-items: center;
-    background-color: #07222e;
-}
-
-#div_ranking{
-    border: 2px solid;
-    height: 250px;
-    width: 90%;
-    margin-top: 15px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 0px;
-    box-shadow:  0 0  12px rgb(0, 255, 255);
-
-}
-
-#div_myInfo{
-    border: 2px solid;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 150px;
-
-}
-
-#div_contatos{
-    border: 2px solid;
-    height: 400px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#nomeperfil p{
-    color: #dceeff;
+.publicacao-btn-editar:hover {
+  background-color: #aaa;
 }

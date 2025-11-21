@@ -1,63 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styleCadastro.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
 
-    <script src="js/sessao.js"></script>
-    <title>SCC | cadastro</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styleCadastro.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Manrope:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <script src="js/sessao.js"></script>
+  <title>SCC | cadastro</title>
 </head>
+
 <body>
-    <header class="header">
+  <header class="header">
     <div class="logo">
-        <h1>Science<span>Craft</span></h1>
+      <h1>Science<span>Craft</span></h1>
     </div>
 
     <nav class="menu">
-        <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="simulador.html">Simulador</a></li>
-            <li><a href="sobre.html">Sobre</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="simulador.html">Simulador</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
     </nav>
-</header>
+  </header>
 
-  <div class="card_erro" id="cardErro">
-    <span id="mensagem_erro"></span>
-  </div>
+  <section class="container">
+    <div class="div_form">
+      <label for="ipt_nome">Nome:</label>
+      <input type="text" id="ipt_nome" value="slaMan">
 
-<section class="container">
-  <div class="div_form">
-        <label for="ipt_nome">Nome:</label>
-    <input type="text" id="ipt_nome" value="slaMan">
-
-        <label for="ipt_email">Email:</label>
-    <input type="email" id="ipt_email" value="sla.teste@sptech.school">
+      <label for="ipt_email">Email:</label>
+      <input type="email" id="ipt_email" value="sla.teste@sptech.school">
 
 
-        <label for="ipt_dtNasc">Data de nascimento:</label>
-    <input type="date" id="ipt_dtNasc" value="2005-02-02">
+      <label for="ipt_dtNasc">Data de nascimento:</label>
+      <input type="date" id="ipt_dtNasc" value="2005-02-02">
 
-    
-    <label for="ipt_senha">Senha:</label>
-    <input type="password" id="ipt_senha" value="senha321">
-    
-    <label for="ipt_senha2">Confirmar senha:</label>
-    <input type="password" id="ipt_senha2" value="senha321">
-    
-    <label for="ipt_codigo">Codigo de convite:</label>
- <input type="text" id="ipt_codigo" value="10">
- 
-    <button onclick="cadastrar()">Cadastrar</button>
-    <div class="message" id="msg"></div>
-  </div>
-</section>
+
+      <label for="ipt_senha">Senha:</label>
+      <input type="password" id="ipt_senha" value="senha321">
+
+      <label for="ipt_senha2">Confirmar senha:</label>
+      <input type="password" id="ipt_senha2" value="senha321">
+
+      <label for="ipt_codigo">Codigo de convite:</label>
+      <input type="text" id="ipt_codigo" value="10">
+
+      <button onclick="cadastrar()">Cadastrar</button>
+      <div class="message" id="msg"></div>
+    </div>
+    <div class="card_erro" id="cardErro">
+      <span id="mensagem_erro"></span>
+      <div id="div_aguardar" class="loading-div">
+        <img src="assets/imgs/circulo-carregamento.png" id="loading-gif">
+      </div>
+    </div>
+  </section>
 
 </body>
+
 </html>
 
 <script>
@@ -65,7 +71,7 @@
   let listaEmpresasCadastradas = [];
 
   function cadastrar() {
-    // aguardar();
+    aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
@@ -80,7 +86,7 @@
     if (
       nomeVar == "" ||
       emailVar == "" ||
-      dtNascVar == "" ||      
+      dtNascVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
       conviteVar == ""

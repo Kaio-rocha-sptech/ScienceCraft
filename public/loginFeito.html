@@ -6,117 +6,53 @@
     <title>Painel</title>
     <link rel="stylesheet" href="css/stylePrincipal.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/sessao.js"></script>
 </head>
 
-<!-- <body onload="validarSessao(), atualizarFeed()">
+<body onload="validarSessao(), atualizarFeed()">
     <header class="header">
         <div class="logo">
             <h1>Science<span>Craft</span></h1>
+
         </div>
+        <span id="b_usuario"></span>
 
         <nav class="menu">
             <ul>
                 <li><a href="index.html">Início</a></li>
-                <li><a href="simulador.html">Simulador</a></li>
                 <li><a href="cadastro.html">Cadastro</a></li>
                 <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
 
-     <div id="div_conteudo">
-    <div id="divPublicacao" class="divPublicacao">
-        <div id="div_infoUser" class="infoUser">
-            <div id="div_imgPerfil">
-                <img src="assets/imgs/user.png" width="100%" height="100%" alt="">
-            </div>
-            <div id="nomePerfil"><p>@titulo aleatorio</p></div>
+    <h1>Publicar um aviso</h1>
+    <div class="div-form">
+        <form id="form_postagem" method="post" onsubmit="return publicar()">
+            <label>
+                Título:
+                <br>
+                <input name="titulo" id="titulo" maxlength="100" type="text">
+            </label>
+            <br>
+            <br>
+            <label>
+                Descrição (máximo de 250 caracteres):
+                <br>
+                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+            </label>
+            <br>
+            <br>
+            <button>Enviar</button>
+        </form>
+    </div>
+    <h1>Mural de Avisos</h1>
+    <div class="div-results">
+        <div id="feed_container" class="feed-container">
         </div>
-        <div id="div_img" class="div_img">
-            <img src="assets/imgs/exemplo.png" width="100%" height="100%" alt="">
-        </div>
-    </div>
-    <div id="right-container" class="right-container">
-        <div id="div_ranking">ranking</div>
-        <div id="div_myInfo">minhas informaçoes</div>
-        <div id="div_contatos">contatos</div>
     </div>
     </div>
-    <a href="login.html">Sair</a>
 </body>
-
-</html> -->
-
-    <div class="janela">
-
-
-        <div class="header-left">
-
-            <h1>AquaTech</h1>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav">
-                <h3>Mural de Avisos</h3>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
-        </div>
-
-        <div class="dash-right">
-
-
-            <div class="avisos">
-                <div id="alerta">
-                </div>
-                <div class="container">
-                    <h1>Publicar um aviso</h1>
-                    <div class="div-form">
-                        <form id="form_postagem" method="post" onsubmit="return publicar()">
-                            <label>
-                                Título:
-                                <br>
-                                <input name="titulo" id="titulo" maxlength="100" type="text">
-                            </label>
-                            <br>
-                            <br>
-                            <label>
-                                Descrição (máximo de 250 caracteres):
-                                <br>
-                                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                            </label>
-                            <br>
-                            <br>
-                            <button>Enviar</button>
-                        </form>
-                    </div>
-                    <h1>Mural de Avisos</h1>
-                    <div class="div-results">
-                        <div id="feed_container" class="feed-container">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
@@ -126,7 +62,6 @@
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
-
         var corpo = {
             titulo: form_postagem.titulo.value,
             descricao: form_postagem.descricao.value
@@ -139,12 +74,10 @@
             },
             body: JSON.stringify(corpo)
         }).then(function (resposta) {
-
             console.log("resposta: ", resposta);
-
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "/dashboard/loginFeito.html";
+                window.location = "loginFeito.html";
                 limparFormulario();
                 finalizarAguardar();
             } else if (resposta.status == 404) {
@@ -158,29 +91,26 @@
         });
 
         return false;
-
     }
 
-    function editar(idAviso) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idAviso;
-        console.log("cliquei em editar - " + idAviso);
-        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idAviso);
+    function editar(idPublicacao) {
+        sessionStorage.ID_POSTAGEM_EDITANDO = idPublicacao;
+        console.log("cliquei em editar - " + idPublicacao);
+        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idPublicacao);
         window.location = "/dashboard/edicao-aviso.html"
-
     }
 
-    function deletar(idAviso) {
-        console.log("Criar função de apagar post escolhido - ID" + idAviso);
-        fetch(`/publicacao/deletar/${idAviso}`, {
+    function deletar(idPublicacao) {
+        console.log("Criar função de apagar post escolhido - ID" + idPublicacao);
+        fetch(`/publicacao/deletar/${idPublicacao}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             }
         }).then(function (resposta) {
-
             if (resposta.ok) {
                 window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/loginFeito.html"
+                window.location = "loginFeito.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -201,15 +131,12 @@
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
                 }
-
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-
                     var feed = document.getElementById("feed_container");
                     feed.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
-
                         // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
                         var spanID = document.createElement("span");
@@ -220,7 +147,6 @@
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
 
-
                         spanID.innerHTML = "ID: <b>" + publicacao.idPublicacao + "</b>";
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
@@ -229,20 +155,17 @@
                         btnDeletar.innerHTML = "Deletar";
 
                         divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
+                        spanTitulo.id = "inputNumero" + publicacao.idPublicacao;
                         spanNome.className = "publicacao-nome";
                         spanTitulo.className = "publicacao-titulo";
                         divDescricao.className = "publicacao-descricao";
-
                         divButtons.className = "div-buttons"
-
                         btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idAviso;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
-
+                        btnEditar.id = "btnEditar" + publicacao.idPublicacao;
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.idPublicacao})`);
                         btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
+                        btnDeletar.id = "btnDeletar" + publicacao.idPublicacao;
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPublicacao})`);
 
                         divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
@@ -253,7 +176,6 @@
                         divButtons.appendChild(btnDeletar);
                         feed.appendChild(divPublicacao);
                     }
-
                     finalizarAguardar();
                 });
             } else {
@@ -264,4 +186,5 @@
             finalizarAguardar();
         });
     }
+
 </script>

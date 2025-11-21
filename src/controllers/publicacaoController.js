@@ -111,7 +111,7 @@ function editar(req, res) {
 function deletar(req, res) {
     var idPublicacao = req.params.idPublicacao;
 
-    publciacaoModel.deletar(idPublicacao)
+    publicacaoModel.deletar(idPublicacao)
         .then(
             function (resultado) {
                 res.json(resultado);

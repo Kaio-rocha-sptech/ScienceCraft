@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styleLogin.css">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Manrope:wght@400;600&display=swap"
+        rel="stylesheet">
 
     <script src="js/sessao.js"></script>
     <title>SCC | login</title>
@@ -35,22 +36,23 @@
             </div>
         </div>
 
-    <section class="container">
-        <div id="div_for-login" class="div_form">
-            <label for="ipt_1">Email:</label><br>
-            <input type="text" class="ipt_login" id="ipt_email" value="kaio.rocha@sptech.school">
-            <br><br>
-            <label for="ipt_2">Senha:</label><br>
-            <input type="password" class="ipt_login" id="ipt_senha" value="senha123">
-            <button onclick="entrar()">Login</button>
-        </div>
-        <div id="div_erros_login"></div>  
-  <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>              
-    </section>
+        <section class="container">
+            <div id="div_for-login" class="div_form">
+                <label for="ipt_1">Email:</label><br>
+                <input type="text" class="ipt_login" id="ipt_email" value="kaio.rocha@sptech.school">
+                <br><br>
+                <label for="ipt_2">Senha:</label><br>
+                <input type="password" class="ipt_login" id="ipt_senha" value="senha123">
+                <button onclick="entrar()">Login</button>
+                <br>
+                <div id="div_erros_login"></div>
+                <div id="div_aguardar" class="loading-div">
+                    <img src="assets/imgs/circulo-carregamento.png" id="loading-gif">
+                </div>
+            </div>
+        </section>
 
-    <!-- <footer class="rodape">
+        <!-- <footer class="rodape">
         <p>2025 ScienceCraft — Criado por Kaio Rodrigues</p>
         <div class="links_rodape">
             <a href="#">GitHub</a>
@@ -64,7 +66,7 @@
 
 <script>
 
- function entrar() {
+    function entrar() {
         aguardar();
 
         var emailVar = ipt_email.value;
@@ -103,7 +105,7 @@
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
 
                     setTimeout(function () {
                         window.location = "loginFeito.html";
