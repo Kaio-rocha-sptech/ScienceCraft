@@ -29,7 +29,7 @@ h4{
 
 .div-form{
   margin-left: 30px;
-  width: 50%;
+  width: 40vw;
   height: 450px;
   display: flex;
   text-align: left;
@@ -64,7 +64,7 @@ h4{
 }
 
 .div-form input {
-  width: 130%;
+  width: 250%;
   background-color: #ffffff1e;
   height: 30px;
   padding-left: 20px;
@@ -84,7 +84,7 @@ input:focus {
 }
 
 .div-form textarea{
-  width: 130%;
+  width: 250%;
   background-color: #ffffff1e;
   height: 40%;
   padding-left: 20px;
