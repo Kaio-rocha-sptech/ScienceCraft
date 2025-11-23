@@ -2,15 +2,15 @@ CREATE DATABASE sciencecraft;
 USE sciencecraft;
 
 CREATE TABLE usuario(
-idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(45) NOT NULL,
-email VARCHAR(120) NOT NULL,
-emailRec VARCHAR(120),
-senha VARCHAR(45) NOT NULL,
-dtNasc DATE,
-fkConvite INT,
-	FOREIGN KEY (fkConvite) REFERENCES usuario(idUsuario) 
-)AUTO_INCREMENT = 10;
+    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    email VARCHAR(120) NOT NULL,
+    senha VARCHAR(45) NOT NULL,
+    dtNasc DATE,
+    dataCadastro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fkConvite INT,
+    FOREIGN KEY (fkConvite) REFERENCES usuario(idUsuario)
+) AUTO_INCREMENT = 10;
 
 INSERT INTO usuario VALUES
 (DEFAULT, 'kaio','kaio.rocha@sptech.school','kaio.rodrigues@sptech.school','senha123','2006-05-14', NULL);
