@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <script src="js/sessao.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body onload="carregarDashboard()">
 
     <header class="header">
@@ -20,7 +22,7 @@
                 <li><a href="index.html">Início</a></li>
                 <li><a href="cadastro.html">Cadastro</a></li>
                 <li><a href="login.html">Login</a></li>
-                <li><a href="loginFeito.html">Publicações   </a></li>
+                <li><a href="loginFeito.html">Publicações </a></li>
             </ul>
         </nav>
     </header>
@@ -40,58 +42,90 @@
     </section>
 
 </body>
+
 </html>
-
 <script>
-idConvite.innerHTML = sessionStorage.ID_USUARIO;
+    idConvite.innerHTML = sessionStorage.ID_USUARIO;
 
-let chartRankingTotal;
-let intervaloAtualizacao;
+    let graficoRankingTotal = null;
+    let intervaloDeAtualizacao = null;
 
-function carregarDashboard() {
-    atualizarDashboard();
-    intervaloAtualizacao = setInterval(atualizarDashboard, 3000);
-}
+    function carregarDashboard() {
+        atualizarDashboard();
+        intervaloDeAtualizacao = setInterval(atualizarDashboard, 3000);
+    }
 
-function atualizarDashboard() {
-    let idUsuario = sessionStorage.ID_USUARIO;
+    function atualizarDashboard() {
 
-    // === Contador de convites do usuário ===
-    fetch(`/convites/quantidade/${idUsuario}`, { cache: 'no-store' })
-        .then(res => res.json())
-        .then(dados => {
-            let total = 0;
-            if (Array.isArray(dados) && dados.length > 0) {
-                total = dados[0].total;
-            }
-            document.getElementById("contadorConvites").innerText = total;
-        })
-        .catch(err => console.error("Erro ao obter convites do usuário:", err));
+        let idUsuario = sessionStorage.ID_USUARIO;
 
-    // === Ranking total ===
-    fetch('/convites/ranking/total')
-        .then(res => res.json())
-        .then(dados => {
-            if (!Array.isArray(dados)) dados = [];
-            let labels = dados.map(u => u.nome);
-            let valores = dados.map(u => u.totalConvites);
+        fetch(`/convites/quantidade/${idUsuario}`, { cache: 'no-store' })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (listaDeDados) {
 
-            if (!chartRankingTotal) {
-                chartRankingTotal = new Chart(document.getElementById('graficoRankingTotal'), {
-                    type: 'bar',
-                    data: { labels, datasets: [{ label: 'Total de Convites',
-                    data: valores,
-                    backgroundColor: '#00ffff',
-                    borderWidth: 2 }] 
-                    },
-                    options: { scales: { y: { beginAtZero: true } } }
-                });
-            } else {
-                chartRankingTotal.data.labels = labels;
-                chartRankingTotal.data.datasets[0].data = valores;
-                chartRankingTotal.update();
-            }
-        })
-        .catch(err => console.error("Erro ao obter ranking total:", err));
-}
+                let totalConvites = 0;
+
+                // Se vier algo na lista, pega o primeiro item
+                if (Array.isArray(listaDeDados) && listaDeDados.length > 0) {
+                    totalConvites = listaDeDados[0].total;
+                }
+
+                document.getElementById("contadorConvites").innerText = totalConvites;
+            })
+            .catch(function (erro) {
+                console.error("Erro ao obter convites do usuário:", erro);
+            });
+
+        fetch('/convites/ranking/total')
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (listaDeUsuarios) {
+                if (!Array.isArray(listaDeUsuarios)) {
+                    listaDeUsuarios = [];
+                }
+                let vetorNomes = [];
+                let vetorQuantidades = [];
+                for (let i = 0; i < listaDeUsuarios.length; i++) {
+                    let usuarioAtual = listaDeUsuarios[i];
+
+                    vetorNomes.push(usuarioAtual.nome);
+                    vetorQuantidades.push(usuarioAtual.totalConvites);
+                }
+
+                if (graficoRankingTotal == null) {
+                    graficoRankingTotal = new Chart(
+                        document.getElementById('graficoRankingTotal'),
+                        {
+                            type: 'bar',
+                            data: {
+                                labels: vetorNomes,
+                                datasets: [{
+                                    label: 'Total de Convites',
+                                    data: vetorQuantidades,
+                                    backgroundColor: '#00ffff',
+                                    borderWidth: 2
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: { beginAtZero: true }
+                                }
+                            }
+                        }
+                    );
+
+                } else {
+                    graficoRankingTotal.data.labels = vetorNomes;
+                    graficoRankingTotal.data.datasets[0].data = vetorQuantidades;
+                    graficoRankingTotal.update();
+                }
+            })
+            .catch(function (erro) {
+                console.error("Erro ao obter ranking total:", erro);
+            });
+
+    }
 </script>
