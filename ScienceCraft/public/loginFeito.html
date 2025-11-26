@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Painel</title>
+    <link rel="stylesheet" href="css/stylePrincipal.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/sessao.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+</head>
+
+<body onload="atualizarFeed()">
+    <header class="header">
+        <div class="logo">
+            <h1>Science<span>Craft</span></h1>
+
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="dashboard.html">dashboard</a>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 style="margin-top: 20px; margin-bottom: 20px;"><span style="color: #d3e7ff;">Seja Bem-vindo: </span><span
+            id="b_usuario"></span></h1>
+    <div class="div-form">
+        <form id="form_postagem" method="post" onsubmit="return publicar()">
+            <label>
+                <br>
+                <h4>Titulo da publicação</h4>
+                <br>
+                <input name="titulo" id="titulo" maxlength="100" type="text">
+            </label>
+            <br>
+            <br>
+            <label>
+                <h4>insira o conteudo da sua publicação</h4>
+                <br>
+                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+            </label>
+            <br>
+            <button>Enviar</button>
+            <br>
+        </form>
+    </div>
+    <h1 style="margin-top: 20px;">Mural de Publicações</h1>
+    <div id="feed_container" class="feed-container">
+
+    </div>
+    </div>
+</body>
+<script>
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    id_usuario = sessionStorage.ID_USUARIO;
+
+    function limparFormulario() {
+        document.getElementById("form_postagem").reset();
+    }
+
+
+    function publicar() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var corpo = {
+            titulo: form_postagem.titulo.value,
+            descricao: form_postagem.descricao.value
+        }
+
+        fetch(`/publicacao/publicar/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+            if (resposta.ok) {
+                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                window.location = "loginFeito.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function editar(idPublicacao) {
+        sessionStorage.ID_POSTAGEM_EDITANDO = idPublicacao;
+        console.log("cliquei em editar - " + idPublicacao);
+        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idPublicacao);
+        window.location = "editarPub.html"
+    }
+
+    function deletar(idPublicacao) {
+        console.log("Criar função de apagar post escolhido - ID" + idPublicacao);
+        fetch(`/publicacao/deletar/${idPublicacao}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                window.location = "loginFeito.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function VerMais(idPublicacao) {
+        console.log("Abrindo publicação - ID " + idPublicacao);
+        // Redireciona para a página publicacao.html com o id na URL
+        window.location.href = `publicacao.html?idPublicacao=${idPublicacao}`;
+    }
+
+
+    function atualizarFeed() {
+        fetch("/publicacao/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var spanID = document.createElement("span");
+                        var spanTitulo = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var divDescricao = document.createElement("div");
+                        var divButtons = document.createElement("div");
+                        var btnEditar = document.createElement("button");
+                        var btnDeletar = document.createElement("button");
+                        var btnVerMais = document.createElement("button");
+
+                        spanID.innerHTML = "ID: <b>" + publicacao.idPublicacao + "</b>";
+                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+                        btnEditar.innerHTML = "Editar";
+                        btnDeletar.innerHTML = "Deletar";
+                        btnVerMais.innerHTML = "Ver Mais";
+                        divPublicacao.className = "publicacao";
+                        spanTitulo.id = "inputNumero" + publicacao.idPublicacao;
+                        spanNome.className = "publicacao-nome";
+                        spanTitulo.className = "publicacao-titulo";
+                        divDescricao.className = "publicacao-descricao";
+                        divButtons.className = "div-buttons"
+                        btnEditar.className = "publicacao-btn-editar"
+                        btnEditar.id = "btnEditar" + publicacao.idPublicacao;
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.idPublicacao})`);
+                        btnDeletar.className = "publicacao-btn-editar"
+                        btnDeletar.id = "btnDeletar" + publicacao.idPublicacao;
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPublicacao})`);
+                        btnVerMais.className = "publicacao-btn-editar"
+                        btnVerMais.id = "btnVerMais" + publicacao.idPublicacao;
+                        btnVerMais.setAttribute("onclick", `VerMais(${publicacao.idPublicacao})`);
+
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(divDescricao);
+                        divPublicacao.appendChild(divButtons);
+                        divButtons.appendChild(btnEditar);
+                        divButtons.appendChild(btnDeletar);
+                        divButtons.appendChild(btnVerMais);
+                        feed.appendChild(divPublicacao);
+                    }
+                    finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            finalizarAguardar();
+        });
+    }
+
+</script>

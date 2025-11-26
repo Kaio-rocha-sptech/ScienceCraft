@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScienceCraft | Instalação</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0f1b;
+            color: #e1e1e1;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #00aaff;
+        }
+
+        .box {
+            background: #111827;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 10px #000;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background: #00aaff;
+            border: none;
+            width: 100%;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background: #33c9ff;
+        }
+
+        .resultado {
+            font-size: 22px;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #00ffaa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Guia de Instalação — ScienceCraft</h1>
+
+    <div class="box">
+        <h2>1. Requisitos Mínimos</h2>
+        <p>• Processador: Dual Core 2.0 GHz</p>
+        <p>• Memória RAM: 4 GB</p>
+        <p>• Placa de vídeo: integrada ou dedicada básica</p>
+        <p>• Internet: 2 Mbps+</p>
+    </div>
+
+    <div class="box">
+        <h2>2. Como Instalar</h2>
+        <p><b>Passo 1:</b> Baixe o instalador oficial pelo botão “Download”.</p>
+        <p><b>Passo 2:</b> Execute o instalador como administrador.</p>
+        <p><b>Passo 3:</b> Escolha o diretório de instalação.</p>
+        <p><b>Passo 4:</b> Aguarde o carregamento.</p>
+        <p><b>Passo 5:</b> Abra o ScienceCraft e faça login.</p>
+    </div>
+
+    <div class="box">
+        <h2>Calculadora de FPS Esperado</h2>
+        <p>Informe sua configuração e veja a média aproximada de FPS esperada.</p>
+
+        <label>Processador:</label>
+        <select id="cpu">
+            <option value="1">Fraco (Dual Core / i3 antigos / Ryzen 3 antigos)</option>
+            <option value="2">Médio (i5 / Ryzen 5)</option>
+            <option value="3">Forte (i7 / Ryzen 7 / i9 iniciais)</option>
+        </select>
+
+        <label>Placa de Vídeo:</label>
+        <select id="gpu">
+            <option value="1">Integrada (Intel HD, Vega)</option>
+            <option value="2">GTX 1050 / 1650 / RX 570</option>
+            <option value="3">RTX 2060 ou superior</option>
+        </select>
+
+        <label>Memória RAM (GB):</label>
+        <input type="number" id="ram" placeholder="Ex: 8">
+
+        <button onclick="calcularFPS()">Calcular FPS</button>
+
+        <p class="resultado" id="resultado"></p>
+    </div>
+
+    <script>
+        function calcularFPS() {
+            let cpu = Number(document.getElementById("cpu").value);
+            let gpu = Number(document.getElementById("gpu").value);
+            let ram = Number(document.getElementById("ram").value);
+
+            if (!ram || ram <= 0) {
+                document.getElementById("resultado").innerHTML = "Insira a quantidade de RAM corretamente.";
+                return;
+            }
+
+            // Valores baseados no hardware selecionado
+            let baseFPS = (cpu * 20) + (gpu * 25) + (ram * 2);
+
+            // FPS final estimado
+            let fps = Math.round(baseFPS);
+
+            document.getElementById("resultado").innerHTML = 
+                "FPS Médio Estimado: " + fps + " FPS";
+        }
+    </script>
+
+</body>
+</html>

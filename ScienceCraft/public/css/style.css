@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  height: 100%;
+  width: 100%;
+}
+
+/* ====== HEADER ====== */
+.header {
+  width: 100%;
+  padding: 15px 6%;
+  background-color: #06141e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  z-index: 50;
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.295);
+  transition: all 0.3s ease;
+}
+
+.header:hover{
+  background-color: #040c13;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+}
+
+.menu a {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #00ffff;
+}
+
+.logo h1 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.8rem;
+  color: #00e6ff;
+  text-transform: uppercase;
+}
+
+.logo span {
+  color: #ffffff;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #b8d8e8;
+  font-family: "Manrope", sans-serif;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  color: #00ffff;
+}
+
+
+
+/* ====== RODAPÉ ====== */
+.rodape {
+  background-color: #06141e;
+  color: #b8d8e8;
+  text-align: center;
+  padding: 20px;
+  position: static;
+  bottom: 0px;
+  width: 100%;
+}
+
+.links_rodape {
+  margin-top: 10px;
+}
+
+.links_rodape a {
+  color: #00e6ff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.links_rodape a:hover {
+  text-decoration: underline;
+}
